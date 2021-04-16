@@ -6,16 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import math
-from JobScrapping.utils.database import update_vacancies
-
-
-
-def get_urls_parsing(client, date):
-    urls = []
-    for doc in client["job_seeking"]["vacancy"].find():
-        if 'time_parsed' not in doc.keys() or doc['time_parsed'] < date:
-            urls.append(doc['_id'])
-    return urls
+from utils.database import update_vacancies
 
 
 def parse_vacancy_page_by_link(driver, url):
@@ -57,9 +48,7 @@ def parse_vacancy_main_page(page):
         'company': company,
         'location': location,
         'salary': salary or None,
-        # 'link': link,
         'url': link,
-        # 'time_parsed': datetime.now(),
     }
 
 
